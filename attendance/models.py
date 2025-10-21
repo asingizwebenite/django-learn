@@ -5,6 +5,17 @@ from django.utils import timezone
 class Farmer(models.Model):
     name=models.CharField()
     farm=models.CharField()
+    GENDER_CHOICES = [
+        ('M', 'Male'),
+        ('F', 'Female'),
+    ]
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES,default='M')
+    YES_NO_CHOICES = [
+        (True, 'Yes'),
+        (False, 'No'),
+    ]
+    is_contracted = models.BooleanField(choices=YES_NO_CHOICES, default=False)
+
 
     class Meta:
         db_table="farmer"

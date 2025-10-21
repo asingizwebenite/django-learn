@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +7,36 @@
 </head>
 <body class="p-4">
     <div class="container">
-        <h2>Add Farmer</h2>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Save</button>
-        </form>
+        <h2>Add New Farmer</h2>
+       <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.name.label_tag }}
+        {{ form.name }}
+    </div>
+    <div class="mb-3">
+        {{ form.farm.label_tag }}
+        {{ form.farm }}
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Gender</label>
+        {% for radio in form.gender %}
+            <div class="form-check form-check-inline">
+                {{ radio.tag }}
+                <label class="form-check-label">{{ radio.choice_label }}</label>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="mb-3">
+        {{ form.is_contracted.label_tag }}
+        {{ form.is_contracted }}
+    </div>
+    <button type="submit" class="btn btn-success">Create Farmer</button>
+</form>
+
         <br>
-        <a href="{% url 'farmer_list' %}" class="btn btn-secondary">View All Farmers</a>
+        <a href="{% url 'farmer_list' %}" class="btn btn-secondary">Back</a>
+
     </div>
 </body>
 </html>
